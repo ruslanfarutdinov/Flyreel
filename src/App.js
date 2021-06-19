@@ -1,17 +1,24 @@
 import React from 'react';
-import './App.css';
 
 import PieChart from './components/PieChart/PieChart';
+import BarChart from './components/BarChart/BarChart';
 
-import { data } from './data';
+import './App.css';
+import { populationData } from './data';
 
 function App() {
   return (
     <div className="App">
       <PieChart 
-        pieData={data} 
+        pieData={populationData} 
         width={500} 
-        height={500} />
+        height={500}
+      />
+      {/* <BarChart 
+        barData={populationData} 
+        width={700}
+        height={500}
+      /> */}
     </div>
   );
 }
