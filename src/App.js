@@ -1,4 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 import PieChart from './components/PieChart/PieChart';
 import BarChart from './components/BarChart/BarChart';
@@ -19,28 +24,37 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className="Sidebar">
-        <Dropdown 
-          selectId="population"
-          labelText="Choose Chart Type:"
-          options={dropdownOptions}
-          onChangeHandler={onDropdownChangeHandler}
-        />
+    <Router>
+      <div className="App">
+        <div className="Sidebar">
+          <Dropdown 
+            selectId="population"
+            labelText="Choose Chart Type:"
+            options={dropdownOptions}
+            onChangeHandler={onDropdownChangeHandler}
+          />
+        </div>
+        <div className="Chart">
+          <Switch>
+            <Route path="/pie">
+                <PieChart 
+                  pieData={populationData} 
+                  width={500} 
+                  height={500}
+                />
+            </Route>
+            <Route path="/bar">
+              
+                <BarChart 
+                  barData={populationData} 
+                  width={700}
+                  height={500}
+                />
+            </Route>
+          </Switch>
+        </div>
       </div>
-      <div className="Chart">
-        {/* <PieChart 
-          pieData={populationData} 
-          width={500} 
-          height={500}
-        /> */}
-        <BarChart 
-          barData={populationData} 
-          width={700}
-          height={500}
-        />
-      </div>
-    </div>
+    </Router>
   );
 }
 

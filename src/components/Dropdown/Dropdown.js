@@ -13,7 +13,7 @@ function Dropdown({
     <div className="Dropdown">
       <label htmlFor={selectId}>{labelText}</label>
       <select id={selectId} onChange={onChangeHandler}>
-        <option value="">--Please choose an option--</option>
+        <option value="">-Please choose an option-</option>
         {options.map(option => (
           <option key={option.id} value={option.value}>{option.value}</option>
         ))}
