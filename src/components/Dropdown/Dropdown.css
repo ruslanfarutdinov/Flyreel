@@ -1,0 +1,4 @@
+.Dropdown {
+  display: flex;
+  flex-direction: column;
+}
