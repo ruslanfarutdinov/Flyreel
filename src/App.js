@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
+import React from 'react';
+import { 
+  Switch, 
+  Route, 
+  useHistory,
 } from "react-router-dom";
 
 import PieChart from './components/PieChart/PieChart';
@@ -12,49 +12,54 @@ import Dropdown from './components/Dropdown/Dropdown';
 import './App.css';
 import { populationData } from './data';
 
-function App() {
-  const [dropdownOptions] = useState([
-    { id: 1, value: 'Pie Chart' },
-    { id: 2, value: 'Bar Chart' },
-  ]);
+const dropdownOptions = [
+  { id: 0, value: '--Please choose an option--' },
+  { id: 1, value: 'Pie Chart' },
+  { id: 2, value: 'Bar Chart' },
+];
 
-  const onDropdownChangeHandler = e => {
+function App() {
+  let history = useHistory();
+
+  function onOptionChangeHandler(e) {
     e.preventDefault();
-    console.log(e.target.value);
-  };
+
+    if (e.target.value === 'Pie Chart') {
+      history.push('/pie');
+    } else if (e.target.value === 'Bar Chart') {
+      history.push('/bar');
+    }
+  }
 
   return (
-    <Router>
-      <div className="App">
-        <div className="Sidebar">
-          <Dropdown 
-            selectId="population"
-            labelText="Choose Chart Type:"
-            options={dropdownOptions}
-            onChangeHandler={onDropdownChangeHandler}
-          />
-        </div>
-        <div className="Chart">
-          <Switch>
-            <Route path="/pie">
-                <PieChart 
-                  pieData={populationData} 
-                  width={500} 
-                  height={500}
-                />
-            </Route>
-            <Route path="/bar">
-              
-                <BarChart 
-                  barData={populationData} 
-                  width={700}
-                  height={500}
-                />
-            </Route>
-          </Switch>
-        </div>
+    <div className="App">
+      <div className="Sidebar">
+        <Dropdown 
+          selectId="population"
+          labelText="Choose Chart Type:"
+          options={dropdownOptions}
+          onOptionChange={onOptionChangeHandler}
+        />
       </div>
-    </Router>
+      <div className="Chart">
+        <Switch>
+          <Route path="/pie">
+            <PieChart 
+              pieData={populationData} 
+              width={500} 
+              height={500}
+            />
+          </Route>
+          <Route path="/bar">
+            <BarChart 
+              barData={populationData} 
+              width={700}
+              height={500}
+            />
+          </Route>
+        </Switch>
+      </div>
+    </div>
   );
 }
 

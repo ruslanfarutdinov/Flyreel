@@ -7,15 +7,19 @@ function Dropdown({
   selectId,
   labelText,
   options,
-  onChangeHandler,
+  onOptionChange,
  }) {
   return (
     <div className="Dropdown">
       <label htmlFor={selectId}>{labelText}</label>
-      <select id={selectId} onChange={onChangeHandler}>
-        <option value="">-Please choose an option-</option>
+      <select id={selectId} onChange={onOptionChange}>
         {options.map(option => (
-          <option key={option.id} value={option.value}>{option.value}</option>
+          <option 
+            key={option.id} 
+            value={option.value}
+          >
+            {option.value}
+          </option>
         ))}
       </select>
     </div>
@@ -27,10 +31,10 @@ Dropdown.propTypes = {
   labelText: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
-      value: PropTypes.string,
+      id: PropTypes.number.isRequired,
+      value: PropTypes.string.isRequired,
     })).isRequired,
-  onChangeHandler: PropTypes.func.isRequired,
+  onOptionChange: PropTypes.func.isRequired,
 };
 
 export default Dropdown;
