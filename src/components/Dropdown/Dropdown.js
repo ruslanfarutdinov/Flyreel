@@ -11,8 +11,8 @@ function Dropdown({
  }) {
   return (
     <div className="Dropdown">
-      <label htmlFor={selectId}>{labelText}</label>
-      <select id={selectId} onChange={onOptionChange}>
+      <label htmlFor={selectId} className="Label">{labelText}</label>
+      <select id={selectId} onChange={onOptionChange} className="Select">
         {options.map(option => (
           <option 
             key={option.id} 

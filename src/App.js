@@ -34,9 +34,10 @@ function App() {
   return (
     <div className="App">
       <div className="Sidebar">
+        <h2>USA Population</h2>
         <Dropdown 
           selectId="population"
-          labelText="Choose Chart Type:"
+          labelText="Choose chart type:"
           options={dropdownOptions}
           onOptionChange={onOptionChangeHandler}
         />
@@ -44,18 +45,10 @@ function App() {
       <div className="Chart">
         <Switch>
           <Route path="/pie">
-            <PieChart 
-              pieData={populationData} 
-              width={500} 
-              height={500}
-            />
+            <PieChart pieData={populationData} />
           </Route>
           <Route path="/bar">
-            <BarChart 
-              barData={populationData} 
-              width={700}
-              height={500}
-            />
+            <BarChart barData={populationData} />
           </Route>
         </Switch>
       </div>

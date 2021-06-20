@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 
 function PieChart({ 
@@ -26,13 +27,13 @@ function PieChart({
         pieData.data.length
       )
     .reverse());
-  
-  const arcLabel = () => {
-    const radius = Math.min(width, height) / 2 * 0.8;
-    return d3.arc().innerRadius(radius).outerRadius(radius);
-  };
 
   useEffect(() => {
+    const arcLabel = () => {
+      const radius = Math.min(width, height) / 2 * 0.8;
+      return d3.arc().innerRadius(radius).outerRadius(radius);
+    };
+
     const arcs = createPie(pieData.data);
 
     const svg = d3.select(ref.current)
@@ -88,11 +89,31 @@ function PieChart({
             }
             
           }));
-    }, [pieData.data]);
+    }, [pieData, width, height, color, createArc, createPie]);
 
   return (
     <svg width={width} height={height} ref={ref}></svg>
   );
 }
+
+PieChart.defaultProps = {
+  width: 500,
+  height: 500,
+};
+
+PieChart.propTypes = {
+  pieData: PropTypes.shape({
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        value: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+    format: PropTypes.string.isRequired,
+    y: PropTypes.string.isRequired,
+  }).isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
+};
 
 export default PieChart;
