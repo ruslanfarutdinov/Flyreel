@@ -13,29 +13,33 @@ function App() {
     { id: 2, value: 'Bar Chart' },
   ]);
 
-  const onDropdownChangeHandler = useCallback(e => {
+  const onDropdownChangeHandler = e => {
     e.preventDefault();
     console.log(e.target.value);
-  });
+  };
 
   return (
     <div className="App">
-      <PieChart 
-        pieData={populationData} 
-        width={500} 
-        height={500}
-      />
-      {/* <BarChart 
-        barData={populationData} 
-        width={700}
-        height={500}
-      /> */}
-      <Dropdown 
-        selectId="population"
-        labelText="Choose chart type:"
-        options={dropdownOptions}
-        onChangeHandler={onDropdownChangeHandler}
-      />
+      <div className="Sidebar">
+        <Dropdown 
+          selectId="population"
+          labelText="Choose Chart Type:"
+          options={dropdownOptions}
+          onChangeHandler={onDropdownChangeHandler}
+        />
+      </div>
+      <div className="Chart">
+        {/* <PieChart 
+          pieData={populationData} 
+          width={500} 
+          height={500}
+        /> */}
+        <BarChart 
+          barData={populationData} 
+          width={700}
+          height={500}
+        />
+      </div>
     </div>
   );
 }
