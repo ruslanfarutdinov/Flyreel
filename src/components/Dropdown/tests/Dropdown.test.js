@@ -26,7 +26,7 @@ describe('<Dropdown />', () => {
   it('should have correct select element id', () => {
     renderDropdown();
 
-    expect(document.getElementById(selectId)).toBeTruthy();
+    expect(document.getElementById(selectId)).toBeInTheDocument();
   });
 
   it('should display correct label text', () => {
@@ -46,5 +46,17 @@ describe('<Dropdown />', () => {
       { target: { value: 'Option 3' } },
     );
     expect(selectElement.value).toBe(options[2].value);
+  });
+
+  it('should fire onChange when an option changes', () => {
+    renderDropdown();
+    const selectElement = document.getElementById(selectId);
+
+    fireEvent.change(
+      selectElement, 
+      { target: { value: 'Option 3' } },
+    );
+
+    expect(mockOnOptionChange).toHaveBeenCalledTimes(1);
   });
 });
