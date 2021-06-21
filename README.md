@@ -1,8 +1,8 @@
 # Flyreel Coding Challenge
 
 ## To run the app:
-`npm i`
-`npm start`
+1. ``npm i`
+2. `npm start`
 
 ## To run the tests:
 `npm test` 
